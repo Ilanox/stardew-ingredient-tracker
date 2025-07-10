@@ -1,29 +1,30 @@
 {
-  "name": "stardew-ingredient-tracker",
-  "version": "1.0.0",
-  "description": "",
-  "homepage": "https://github.com/Ilanox/stardew-ingredient-tracker#readme",
-  "bugs": {
-    "url": "https://github.com/Ilanox/stardew-ingredient-tracker/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ilanox/stardew-ingredient-tracker.git"
-  },
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
+  "name": "ingredient-tracker-temp",
+  "private": true,
+  "version": "0.0.0",
+  "homepage": "https://ilanox.github.io/stardew-ingredient-tracker",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test":  "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy":   "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "eslint": "^9.30.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
     "gh-pages": "^6.3.0",
-    "react-scripts": "5.0.1"
+    "globals": "^16.3.0",
+    "vite": "^7.0.4"
   }
 }
