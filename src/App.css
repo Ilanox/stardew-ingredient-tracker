@@ -1,42 +1,160 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Stardew Valley dark theme colors */
+:root {
+  --bg-main: #26201b;
+  --bg-panel: #31271d;
+  --bg-panel-dark: #1b1610;
+  --bg-card-green: #38461c;
+  --bg-card-yellow: #695522;
+  --border-gold: #c1a15e;
+  --border-brown: #7b5c35;
+  --highlight-gold: #efd977;
+  --text-main: #e9e0cf;
+  --text-muted: #b6a485;
+  --accent-green: #b0cc57;
+  --accent-yellow: #ffd75d;
+  --accent-red: #df7c6e;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* General app background and text */
+body, .container {
+  background: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  font-family: 'Segoe UI', 'Verdana', 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1, h2 {
+  color: var(--highlight-gold);
+  font-family: 'Luckiest Guy', 'Fredoka One', 'Arial Black', cursive, sans-serif;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px #0005, 0 1px 0 var(--border-gold);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Panels and Cards */
+.bg-green-100 {
+  background: linear-gradient(90deg, var(--bg-card-green) 80%, #486a29 100%) !important;
+  border: 1.5px solid var(--accent-green) !important;
+}
+.bg-yellow-100 {
+  background: linear-gradient(90deg, var(--bg-card-yellow) 85%, #9d8344 100%) !important;
+  border: 1.5px solid var(--accent-yellow) !important;
+}
+.bg-white, .shadow, .rounded {
+  background: var(--bg-panel) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 3px 18px 0 #000a !important;
+  border: 1.5px solid var(--border-brown) !important;
 }
 
-.card {
-  padding: 2em;
+a {
+  color: var(--accent-yellow);
+  transition: color 0.18s;
+}
+a:hover {
+  color: var(--highlight-gold);
+  text-decoration: underline;
 }
 
-.read-the-docs {
-  color: #888;
+input[type="file"] {
+  background: var(--bg-panel-dark);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-gold);
+  border-radius: 7px;
+  padding: 0.7em 1em;
+  margin-top: 6px;
+}
+input[type="file"]:focus {
+  outline: 2px solid var(--accent-yellow);
+}
+
+/* Buttons */
+button {
+  background: var(--border-gold);
+  color: #222;
+  font-weight: bold;
+  border-radius: 7px;
+  border: none;
+  padding: 0.3em 1em;
+  transition: background 0.18s, color 0.14s;
+  cursor: pointer;
+  box-shadow: 0 1px 8px 0 #0006;
+}
+button:hover {
+  background: var(--highlight-gold);
+  color: #593e1a;
+}
+
+/* Card content for lists */
+.flex, .inline-flex {
+  background: transparent !important;
+}
+.p-2 {
+  background: var(--bg-panel) !important;
+  border: 1.5px solid var(--border-brown) !important;
+}
+
+.shadow {
+  box-shadow: 0 3px 16px #0006 !important;
+}
+
+/* Ingredient badge style */
+.inline-flex {
+  background: var(--bg-panel-dark) !important;
+  color: var(--accent-yellow);
+  border: 1px solid var(--border-gold);
+  border-radius: 8px;
+  font-size: 0.95em;
+  font-family: inherit;
+  padding: 0.16em 0.7em;
+  box-shadow: 0 2px 6px #0004;
+}
+.inline-flex .text-xs {
+  color: var(--accent-green);
+}
+
+/* Remove ugly blue focus ring */
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--border-gold);
+}
+
+/* Add a faint pixel grid/texture vibe (optional) */
+body::before {
+  content: '';
+  pointer-events: none;
+  display: block;
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAIUlEQVQYlWP8//8/AzWAiSTiaBikGGJCBYW2mw7D5UEKAAAcvBYyRzVm9AAAAABJRU5ErkJggg==");
+  opacity: 0.10;
+  z-index: 0;
+}
+
+/* Nice scrollbars for dark mode */
+::-webkit-scrollbar {
+  width: 10px;
+  background: var(--bg-panel-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-brown);
+  border-radius: 8px;
+}
+
+/* Make recipe images a little more pixel-art style */
+img[alt] {
+  image-rendering: pixelated;
+}
+
+/* Muted text */
+.text-gray-500, .text-gray-600, .text-gray-700 {
+  color: var(--text-muted) !important;
+}
+
+.container {
+  background: var(--bg-main);
+  border-radius: 18px;
+  padding: 2.2em 1.5em;
+  max-width: 900px;
+  box-shadow: 0 10px 30px #000c, 0 1px 12px #31271d88;
+  margin: 1.6em auto;
+  border: 2px solid var(--border-brown);
 }

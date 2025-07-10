@@ -1,12 +1,57 @@
-# React + Vite
+# Stardew Ingredient Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web tool that helps you track which cooking recipes you’ve made in Stardew Valley — and what ingredients you still need.
 
-Currently, two official plugins are available:
+This app reads your Stardew Valley **save file** and compares it against all known cooking recipes, giving you a breakdown of:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✅ Completed dishes  
+- ❓ Known recipes you haven't cooked yet  
+- 🍳 Missing ingredients for each uncooked recipe  
 
-## Expanding the ESLint configuration
+Built with **React** and **JavaScript**, and hosted on **GitHub Pages**.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🌐 Try It Online
+
+🔗 [Launch the Tracker](https://ilanox.github.io/stardew-ingredient-tracker)
+
+---
+
+## 📝 How to Use
+
+1. Click the **Upload Save File** button.
+2. Select your `SaveGameInfo` file from your Stardew save folder.
+   - On Windows: `C:\Users\<YourName>\AppData\Roaming\StardewValley\Saves\`
+   - On Linux/macOS: `~/.config/StardewValley/Saves/`
+3. See which recipes you’ve cooked, what’s missing, and what ingredients you need to collect!
+
+> ℹ️ Spoiler-friendly output! If your save is from Stardew 1.6, only relevant content will appear.
+
+---
+
+## 💬 Feedback & Support
+
+Feel free to:
+- [Open an issue](https://github.com/Ilanox/stardew-ingredient-tracker/issues) for bugs or suggestions
+- DM me on Discord: **@ilanox**
+
+---
+
+## 📁 Source Code
+
+This project is open-source and available here:  
+🔗 [View on GitHub](https://github.com/Ilanox/stardew-ingredient-tracker)
+
+---
+
+## 🙏 Credits
+
+- Recipe data and images from the [Stardew Valley Wiki](https://stardewvalleywiki.com/)
+- Save file parsing logic inspired by the excellent [Stardew Checkup](https://github.com/MouseyPounds/stardew-checkup)
+
+---
+
+## 📜 License
+
+MIT License

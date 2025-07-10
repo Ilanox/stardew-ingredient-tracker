@@ -1,0 +1,47 @@
+// COLORS
+$yellow: #ffe16a;
+$yellow-light: #fff6b1;
+$yellow-shadow: #b08520;
+$yellow-text-shadow: #9c7b26;
+$yellow-dark: #9c7b26;
+
+$green-complete: #9ce679;
+$green-complete-shadow: #22562566;
+
+$purple-missing: #a281cb;
+
+$text-main: #fbe6ae;
+$desc-text: #fbe6ae;
+$text-muted: #cfc2a4;
+
+$panel-bg: rgba(28, 24, 41, 0.97);
+$card-bg: linear-gradient(120deg, #23263c 80%, #191930 100%);
+$complete-bg: linear-gradient(110deg, #263929 80%, #1e2e21 100%);
+$missing-bg: linear-gradient(120deg, #30293f 80%, #241c2e 100%);
+$badge-bg: #23263c;
+$img-bg: #fff8e3;
+$shopping-bg: linear-gradient(90deg, #21263a 80%, #161a28 100%);
+$input-bg: #2d264a;
+
+$link-hover: #fff6b1;
+
+$scroll-bg: #22204a;
+$scroll-thumb: #b7a26d;
+
+// FONTS
+$font-main: 'StardewValley', 'Press Start 2P', 'VT323', Arial, sans-serif;
+$font-size-base: 1.2rem;
+$font-size-title: 3.2rem;
+$font-size-section: 2rem;
+$font-size-desc: 1.25rem;
+$font-size-card: 1.22rem;
+$font-size-shopping-count: 1.5em;
+$font-size-button: 1.06em;
+
+// SHADOWS
+$shadow-card: 0 3px 14px #0007, 0 1px 4px #0003;
+$shadow-panel: 0 16px 80px #000c, 0 2px 10px #0007;
+$shadow-btn: 1px 2px 10px #0003;
+$shadow-badge: 1px 2px 8px #ffe36933;
+$shadow-recipe-img: 0 2px 6px #0002;
+$badge-shadow: #ffe36933;

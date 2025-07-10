@@ -1,0 +1,300 @@
+@use './variables' as *;
+
+@font-face {
+  font-family: 'StardewValley';
+  src: url('../src/assets/fonts/Stardew_Valley.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background: linear-gradient(to bottom,
+    #262246 0%,
+    #2f2d5a 40%,
+    #32416a 60%,
+    #304457 75%,
+    #2b3641 85%,
+    #1b232a 95%,
+    #1a2329 100%
+  );
+  font-family: $font-main;
+  font-size: 1.2rem;
+  color: $text-main;
+  margin: 0;
+  min-height: 100vh;
+  letter-spacing: 0.5px;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.stardew-panel,
+.stardew-outer {
+  background: $panel-bg;
+  border: 2.5px solid $yellow;
+  box-shadow: 0 16px 80px #000c, 0 2px 10px #0007;
+  border-radius: 20px;
+  padding: 36px;
+  width: 100%;
+  max-width: 1020px;
+  margin: 38px auto 28px auto;
+}
+
+h1, .stardew-title {
+  color: $yellow;
+  font-family: $font-main;
+  font-size: 3.2rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #b08520, 0 2px 18px #fff8;
+  margin-bottom: 22px;
+}
+
+.stardew-desc, .stardew-muted, p {
+  color: $text-muted;
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+  font-family: inherit;
+}
+
+h2, .stardew-section-title {
+  font-size: 2rem;
+  color: $yellow;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 0 #5a3e09;
+  font-family: $font-main;
+}
+
+.stardew-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stardew-summary {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: $panel-bg;
+  padding: 20px;
+  border: 2px solid $yellow;
+  border-radius: 16px;
+  font-family: $font-main;
+  font-size: 1.1rem;
+  color: $desc-text;
+
+  p {
+    margin: 0 0 10px;
+    color: $text-main;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 6px;
+    }
+  }
+
+  strong {
+    color: $yellow;
+  }
+}
+
+.grid, .stardew-recipe-grid, .stardew-shopping-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.stardew-card {
+  background: $card-bg;
+  border: 2.5px solid $yellow;
+  border-radius: 15px;
+  box-shadow: 0 3px 14px #0007, 0 1px 4px #0003;
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  transition: box-shadow 0.2s, border-color 0.18s, background 0.18s;
+
+  &-complete {
+    background: $complete-bg;
+    border-color: #9ce679;
+    box-shadow: 0 3px 20px #22562566;
+  }
+
+  &-missing {
+    background: $missing-bg;
+    border-color: #c55959;
+  }
+
+  &-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 5px;
+  }
+
+  &-title {
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+}
+
+.stardew-recipe-img {
+  background: #fff9e5;
+  border: 2px solid $yellow;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px #0002;
+}
+
+.stardew-ingredients, .flex-wrap, .flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.stardew-badge,
+.stardew-ingredient-badge,
+.inline-flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: $badge-bg;
+  color: $yellow;
+  border-radius: 16px;
+  border: 1.5px solid $yellow;
+  box-shadow: 1px 2px 8px $badge-shadow;
+
+  font-size: 1.05em;
+  padding: 3px 12px 3px 4px;
+
+  height: 36px; // make it consistent
+  line-height: 1;
+}
+
+.stardew-badge-img {
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: $img-bg;
+  border-radius: 10px;
+  border: 1px solid $yellow;
+  padding: 4px; // ✅ this gives space between image and border
+}
+
+.stardew-link, a {
+  color: $yellow;
+  text-decoration: none;
+  font-family: inherit;
+  transition: text-decoration 0.1s, color 0.18s;
+
+  &:hover {
+    text-decoration: underline;
+    color: $link-hover;
+  }
+}
+
+.stardew-shopping-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $shopping-bg;
+  border: 2px solid $yellow;
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: $font-size-card;
+  box-shadow: $shadow-card;
+  min-height: 50px;
+  gap: 12px;
+
+  &:hover {
+    background: #ffe16a1c;
+    border-color: $yellow-light;
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background: #fff9e5;
+    border-radius: 8px;
+    border: 2px solid $yellow;
+    box-shadow: $shadow-recipe-img;
+  }
+
+  .stardew-shopping-name {
+    flex: 1;
+    color: $yellow;
+    font-family: $font-main;
+    text-decoration: none;
+    padding: 0 10px;
+
+    &:hover {
+      text-decoration: underline;
+      color: $link-hover;
+    }
+  }
+
+  .stardew-shopping-count {
+    flex-shrink: 0;
+    color: $yellow;
+    font-weight: bold;
+    font-family: $font-main;
+    font-size: $font-size-shopping-count;
+    text-shadow: 1px 1px 0 $yellow-shadow;
+  }
+}
+
+.stardew-sort-btn, button {
+  background: $yellow;
+  color: #362911;
+  border-radius: 7px;
+  border: none;
+  font-family: $font-main;
+  padding: 6px 22px;
+  font-size: 1.06em;
+  margin-left: 9px;
+  cursor: pointer;
+  box-shadow: 1px 2px 10px #0003;
+  transition: background 0.15s, color 0.15s;
+  outline: none;
+
+  &:hover {
+    background: $yellow-light;
+    color: #785c23;
+  }
+}
+
+.at-symbol {
+  font-family: sans-serif;
+  font-size: 0.85em;
+}
+
+input[type="file"] {
+  font-size: 1rem;
+  padding: 3px 10px;
+  background: #2d264a;
+  color: $yellow;
+  border-radius: 7px;
+  border: 1.5px solid $yellow;
+  margin-top: 8px;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+  background: $scroll-bg;
+}
+::-webkit-scrollbar-thumb {
+  background: $scroll-thumb;
+  border-radius: 8px;
+}
