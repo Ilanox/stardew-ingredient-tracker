@@ -1,4 +1,6 @@
 @use './variables' as *;
+@use 'sass:color';
+@use 'sass:map';
 
 @font-face {
   font-family: 'StardewValley';
@@ -216,6 +218,7 @@ h2, .stardew-section-title {
   box-shadow: $shadow-card;
   min-height: 50px;
   gap: 12px;
+  transition: box-shadow 0.2s, border-color 0.18s, background 0.18s;
 
   &:hover {
     background: #ffe16a1c;
@@ -226,7 +229,7 @@ h2, .stardew-section-title {
     width: 32px;
     height: 32px;
     flex-shrink: 0;
-    background: #fff9e5;
+    background: $img-bg;
     border-radius: 8px;
     border: 2px solid $yellow;
     box-shadow: $shadow-recipe-img;
@@ -253,7 +256,15 @@ h2, .stardew-section-title {
     font-size: $font-size-shopping-count;
     text-shadow: 1px 1px 0 $yellow-shadow;
   }
+
+  // Apply background + border from $type-colors
+  @each $type, $map in $type-colors {
+    &.type-#{$type} {
+      border-color: map.get($map, border);
+    }
+  }
 }
+
 
 .stardew-sort-btn, button {
   background: $yellow;

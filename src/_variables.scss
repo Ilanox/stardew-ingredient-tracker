@@ -45,3 +45,47 @@ $shadow-btn: 1px 2px 10px #0003;
 $shadow-badge: 1px 2px 8px #ffe36933;
 $shadow-recipe-img: 0 2px 6px #0002;
 $badge-shadow: #ffe36933;
+
+// TYPE COLORS
+$type-colors: (
+  crop: (
+    bg: #2e3d2e,
+    border: #5c8651
+  ),
+  tree: (
+    bg: #3c3928,
+    border: #91884e
+  ),
+  animal: (
+    bg: #453829,
+    border: #b5915a
+  ),
+  forage: (
+    bg: #3e2c46,
+    border: #a274ba
+  ),
+  general: (
+    bg: #3a3224,
+    border: #c29b4c
+  ),
+  artisan: (
+    bg: #4a2f36,
+    border: #d69ba9
+  ),
+  fish: (
+    bg: #2a3945,
+    border: #6aa0c9
+  ),
+  crab-pot: (
+    bg: #44332b,
+    border: #cf866b
+  ),
+  dish: (
+    bg: #433d2b,
+    border: #d5c475
+  ),
+  miscellaneous: (
+    bg: #2f3537,
+    border: #7e8d92
+  )
+);

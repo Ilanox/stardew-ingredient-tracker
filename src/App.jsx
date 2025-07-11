@@ -23,13 +23,14 @@ function getIngredientTotalsWithImgs(recipeNames) {
   recipeNames.forEach(recipeName => {
     const recipe = recipes[recipeName];
     if (!recipe || !Array.isArray(recipe.ingredients)) return;
-    recipe.ingredients.forEach(({ name, count, img }) => {
+    recipe.ingredients.forEach(({ name, count, img, type }) => {
       if (!name) return;
       if (!totals[name]) {
-        totals[name] = { count: 0, img };
+        totals[name] = { count: 0, img, type };
       }
       totals[name].count += count || 0;
       if (img && !totals[name].img) totals[name].img = img;
+      if (type && !totals[name].type) totals[name].type = type;
     });
   });
   return totals;
@@ -131,25 +132,44 @@ function RecipeList({ cooked, known }) {
   );
 }
 
-
 function ShoppingList({ totals }) {
-  const [sortDesc, setSortDesc] = useState(false);
+  const [sortMode, setSortMode] = useState('name'); // cycles: name → quantity → type
+
+  const toggleSortMode = () => {
+    setSortMode(prev =>
+      prev === 'name' ? 'quantity' :
+      prev === 'quantity' ? 'type' :
+      'name'
+    );
+  };
+
   const sortedEntries = Object.entries(totals).sort((a, b) => {
-    if (sortDesc) return b[1].count - a[1].count;
-    return a[0].localeCompare(b[0]);
+    const aType = a[1].type || 'miscellaneous';
+    const bType = b[1].type || 'miscellaneous';
+
+    if (sortMode === 'quantity') return b[1].count - a[1].count;
+    if (sortMode === 'type') {
+      if (aType === bType) return a[0].localeCompare(b[0]);
+      return aType.localeCompare(bType);
+    }
+    return a[0].localeCompare(b[0]); // default: name
   });
 
   return (
     <div className="my-6 stardew-section">
       <div className="flex items-center justify-between mb-2 stardew-section-header">
         <h2 className="stardew-section-title">Shopping List</h2>
-        <button className="stardew-sort-btn" onClick={() => setSortDesc(s => !s)}>
-          Sort by {sortDesc ? 'quantity' : 'name'}
+        <button className="stardew-sort-btn" onClick={toggleSortMode}>
+          Sort by {sortMode}
         </button>
       </div>
+
       <div className="stardew-shopping-grid">
-        {sortedEntries.map(([ingredient, { count, img }]) => (
-          <div key={ingredient} className="stardew-shopping-item">
+        {sortedEntries.map(([ingredient, { count, img, type = 'miscellaneous' }]) => (
+          <div
+            key={ingredient}
+            className={`stardew-shopping-item type-${type.replace(/\s+/g, '-').toLowerCase()}`}
+          >
             <img
               src={getIngredientImgUrl(ingredient, img)}
               alt={ingredient}
@@ -174,6 +194,7 @@ function ShoppingList({ totals }) {
     </div>
   );
 }
+
 
 export default function App() {
   const [cooked, setCooked] = useState([]);
