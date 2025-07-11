@@ -85,7 +85,16 @@ const RECIPE_TRANSLATIONS = {
     730: "Lobster Bisque",
     731: "Maple Bar",
     732: "Crab Cakes",
-    // Add more as needed (for expansions)
+    733: "Shrimp Cocktail",
+    253: "Triple Shot Espresso",
+    265: "Seafoam Pudding",
+    903: "Ginger Ale",
+    904: "Banana Pudding",
+    905: "Mango Sticky Rice",
+    906: "Poi",
+    907: "Tropical Curry",
+    921: "Squid Ink Ravioli",
+    "MossSoup": "Moss Soup"
   };
   
   function normalizeRecipeName(name) {
@@ -101,26 +110,35 @@ const RECIPE_TRANSLATIONS = {
     const cookingRecipes = playerElem.getElementsByTagName('cookingRecipes')[0];
     if (!recipesCooked) return [];
     if (!cookingRecipes) return [];
-  
 
+    let index = 0
     // Each item has a key (recipe ID) and value (number cooked)
     for (const item of recipesCooked.getElementsByTagName('item')) {
       // <key><int>123</int></key>
       const keyElem = item.getElementsByTagName('key')[0];
+
+
       let recipeId = null;
       if (keyElem) {
         // Some use <int>, some use <string>
         const intElem = keyElem.getElementsByTagName('int')[0];
+
         if (intElem) recipeId = intElem.textContent;
         else {
           // Some modded saves may use <string>
+
           const strElem = keyElem.getElementsByTagName('string')[0];
+
           if (strElem) recipeId = strElem.textContent;
+          index++
+          console.log(index)
+          console.log(recipeId)
         }
       }
       // <value><int>1</int></value>
       const valElem = item.getElementsByTagName('value')[0];
       const count = valElem ? Number(valElem.textContent) : 0;
+      console.log(RECIPE_IDS[recipeId])
       if (count > 0 && recipeId && RECIPE_IDS[recipeId]) {
         let rname = RECIPE_IDS[recipeId];
         rname = normalizeRecipeName(rname);
