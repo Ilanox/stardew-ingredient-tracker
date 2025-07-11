@@ -111,7 +111,6 @@ const RECIPE_TRANSLATIONS = {
     if (!recipesCooked) return [];
     if (!cookingRecipes) return [];
 
-    let index = 0
     // Each item has a key (recipe ID) and value (number cooked)
     for (const item of recipesCooked.getElementsByTagName('item')) {
       // <key><int>123</int></key>
@@ -130,9 +129,6 @@ const RECIPE_TRANSLATIONS = {
           const strElem = keyElem.getElementsByTagName('string')[0];
 
           if (strElem) recipeId = strElem.textContent;
-          index++
-          console.log(index)
-          console.log(recipeId)
         }
       }
       // <value><int>1</int></value>
