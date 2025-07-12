@@ -132,8 +132,8 @@ function RecipeList({ cooked, known }) {
   );
 }
 
-function ShoppingList({ totals }) {
-  const [sortMode, setSortMode] = useState('name'); // cycles: name → quantity → type
+function ShoppingList({ totals, cooked, known }) {
+  const [sortMode, setSortMode] = useState('name'); // name → quantity → type
 
   const toggleSortMode = () => {
     setSortMode(prev =>
@@ -143,16 +143,53 @@ function ShoppingList({ totals }) {
     );
   };
 
-  const sortedEntries = Object.entries(totals).sort((a, b) => {
-    const aType = a[1].type || 'miscellaneous';
-    const bType = b[1].type || 'miscellaneous';
+  const cookedSet = new Set(cooked);
+  const knownSet = new Set(known);
 
-    if (sortMode === 'quantity') return b[1].count - a[1].count;
-    if (sortMode === 'type') {
-      if (aType === bType) return a[0].localeCompare(b[0]);
-      return aType.localeCompare(bType);
+  const knownUncookedEntries = Object.entries(recipes).filter(
+    ([name]) => knownSet.has(name) && !cookedSet.has(name)
+  );
+
+  const neededCounts = {};
+  for (const [, recipe] of knownUncookedEntries) {
+    for (const ingredient of recipe.ingredients) {
+      neededCounts[ingredient.name] = (neededCounts[ingredient.name] || 0) + ingredient.count;
     }
-    return a[0].localeCompare(b[0]); // default: name
+  }
+
+  const cookedIngredientCounts = {};
+  for (const recipeName of cooked) {
+    const recipe = recipes[recipeName];
+    if (!recipe) continue;
+
+    for (const ingredient of recipe.ingredients) {
+      cookedIngredientCounts[ingredient.name] = (cookedIngredientCounts[ingredient.name] || 0) + ingredient.count;
+    }
+  }
+
+  const finalNeeded = {};
+  for (const [ingredient, neededCount] of Object.entries(neededCounts)) {
+    const cookedCount = cookedIngredientCounts[ingredient] || 0;
+    const remaining = neededCount - cookedCount;
+    if (remaining > 0) finalNeeded[ingredient] = remaining;
+  }
+
+  const totalKnown = Object.entries(totals)
+    .filter(([name]) => name in finalNeeded)
+    .map(([name, obj]) => ({
+      name,
+      count: finalNeeded[name],
+      img: obj.img,
+      type: obj.type || 'miscellaneous'
+    }));
+
+  const sortedEntries = totalKnown.sort((a, b) => {
+    if (sortMode === 'quantity') return b.count - a.count;
+    if (sortMode === 'type') {
+      if (a.type === b.type) return a.name.localeCompare(b.name);
+      return a.type.localeCompare(b.type);
+    }
+    return a.name.localeCompare(b.name); // default: name
   });
 
   return (
@@ -165,14 +202,14 @@ function ShoppingList({ totals }) {
       </div>
 
       <div className="stardew-shopping-grid">
-        {sortedEntries.map(([ingredient, { count, img, type = 'miscellaneous' }]) => (
+        {sortedEntries.map(({ name, count, img, type }) => (
           <div
-            key={ingredient}
+            key={name}
             className={`stardew-shopping-item type-${type.replace(/\s+/g, '-').toLowerCase()}`}
           >
             <img
-              src={getIngredientImgUrl(ingredient, img)}
-              alt={ingredient}
+              src={getIngredientImgUrl(name, img)}
+              alt={name}
               className="shopping-img"
               onError={e => {
                 e.target.style.opacity = 0.3;
@@ -180,12 +217,12 @@ function ShoppingList({ totals }) {
               }}
             />
             <a
-              href={`https://stardewvalleywiki.com/${encodeURIComponent(ingredient.replace(/ /g, '_'))}`}
+              href={`https://stardewvalleywiki.com/${encodeURIComponent(name.replace(/ /g, '_'))}`}
               target="_blank"
               rel="noopener noreferrer"
               className="shopping-name"
             >
-              {ingredient}
+              {name}
             </a>
             <span className="shopping-count">{count}</span>
           </div>
@@ -252,7 +289,7 @@ export default function App() {
             </ul>
           </div>
           <RecipeList cooked={cooked} known={known} />
-          <ShoppingList totals={shoppingTotals} />
+          <ShoppingList totals={shoppingTotals} cooked={cooked} known={known}/>
         </>
       )}
     </div>
